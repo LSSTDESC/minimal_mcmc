@@ -9,14 +9,10 @@ import sacc
 import pyccl as ccl
 import pyccl.nl_pt
 
-import firecrown.likelihood.weak_lensing as wl
-import firecrown.likelihood.number_counts as nc
-from firecrown.likelihood.two_point import (
-    TwoPoint,
-    TracerNames,
-    TRACER_NAMES_TOTAL,
-)
-from firecrown.likelihood.gaussian import ConstGaussian
+import firecrown.likelihood.gauss_family.statistic.source.weak_lensing as wl
+import firecrown.likelihood.gauss_family.statistic.source.number_counts as nc
+from firecrown.likelihood.gauss_family.statistic.two_point import TwoPoint
+from firecrown.likelihood.gauss_family.gaussian import ConstGaussian
 from firecrown.parameters import ParamsMap
 from firecrown.modeling_tools import ModelingTools
 from firecrown.likelihood.likelihood import Likelihood
@@ -90,15 +86,6 @@ def build_likelihood(_) -> tuple[Likelihood, ModelingTools]:
                     sacc_data_type="galaxy_shear_cl_ee"
                 )
             )
-
-    # Create the likelihood from the statistics
-    pt_calculator = pyccl.nl_pt.EulerianPTCalculator(
-        with_NC=True,
-        with_IA=True,
-        log10k_min=-4,
-        log10k_max=2,
-        nk_per_decade=20,
-    )
 
     modeling_tools = ModelingTools()
     # Note that the ordering of the statistics is relevant, because the data
