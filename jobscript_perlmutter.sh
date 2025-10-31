@@ -1,6 +1,5 @@
 #!/bin/bash -l
 #SBATCH --qos=regular
-#SBATCH --constraint=haswell
 #SBATCH -J desc-tutorial
 #SBATCH -n 100
 #SBATCH --cpus-per-task=1
@@ -13,7 +12,7 @@
 cd $SCRATCH/desc/minimal_mcmc
 
 # Load environment
-source /global/cfs/cdirs/lsst/groups/MCP/setup_forecasts_int.sh
+source /global/cfs/cdirs/lsst/groups/MCP/setup-cosmology-dev.sh
 
 # Run the chain
 time srun cosmosis --mpi forecast_3x2pt.ini
